@@ -1,0 +1,307 @@
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+
+<style>
+    .button {
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px 10px;
+        cursor: pointer;
+    }
+
+    .button1 {
+        border-radius: 5px;
+        /* font-size: 18px; */
+        background-color: white;
+        color: black;
+        border: 2px solid #2d6987
+        /* Green */
+    }
+
+    .button2 {
+        border-radius: 4px;
+    }
+
+    .button3 {
+        border-radius: 8px;
+    }
+
+    .button4 {
+        border-radius: 12px;
+    }
+
+    .button5 {
+        border-radius: 50%;
+    }
+
+
+    .td-center {
+        align: center;
+        text-align: center;
+        padding: 10px
+    }
+
+    .text_div {
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+    #blink {
+        color: red;
+        transition: 0.4s;
+    }
+    .crop {
+        width: 650px;
+        
+        overflow: hidden;
+    }
+    .crop1 {
+        width: 650px;
+        margin: -75px 0 -75px 0px;
+    }
+
+    /* Custom font sizes */
+    .header h3 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+</style>
+
+
+<html lang="en">
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-214815640-1"></script>
+        <!-- <script type="text/javascript">google.load("jquery", "1.3.2");</script> -->
+        <!-- <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-214815640-1');
+        </script> -->
+        <!-- <script src=”http://code.jquery.com/jquery-1.9.1.js”></script> -->
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel='icon' href='img/favicon.ico' type='image/x-icon'/>
+        <meta name="description" content="Guardian">
+        <meta name="author" content="WILLOW team">
+        <title>Guardian</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <div class="container">
+
+        <div style="height:20px;"></div>
+        <div class="header">
+            <h3>
+                <center> <b>Guardian: Detecting Robotic Planning and Execution Errors with Vision-Language Models</b> </center>
+            </h3>
+        </div>
+        <div style="height:10px;"></div>
+
+        <table align=center max-width=700px>
+            <tr>
+                <td align=center width=150px>
+                    <center>
+                        <span style="font-size:18px"><a href="https://paulpacaud.com/" target="_blank">Paul Pacaud</a><sup>*</sup></span>
+                    </center>
+                </td>
+                <td align=center width=200px>
+                    <center>
+                        <span style="font-size:18px"><a href="https://rjgpinel.github.io/" target="_blank">Ricardo Garcia</a><sup>*</sup></span>
+                    </center>
+                </td>
+                <td align=center width=200px>
+                    <center>
+                        <span style="font-size:18px"><a href="https://cshizhe.github.io/" target="_blank">Shizhe Chen</a><sup>*</sup></span>
+                    </center>
+                </td>
+                <td align=center width=200px>
+                    <center>
+                        <span style="font-size:18px"><a href="https://cordeliaschmid.github.io/" target="_blank">Cordelia Schmid</a><sup>*</sup></span>
+                    </center>
+                </td>
+            </tr>
+        </table>
+        <div style="height:5px;"></div>
+
+        <table align=center max-width=650px>
+            <tr>
+                <td align=center width=500px>
+                    <center>
+                        <span style="font-size:16px"><sup>*</sup>Inria, École normale supérieure, CNRS, PSL Research University</span>
+                    </center>
+                </td>
+            </tr>
+        </table>
+        <div style="height:10px;"></div>
+
+        <table align=center width=700px>
+			<tr>
+				<td align=center width=700px>
+					<center>
+						<span style="font-size:16px">Presented at <a href="https://sites.google.com/stanford.edu/corldata25" target="_blank">CoRL 2025 Workshop Robot Data</a> </span>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<div style="height:10px;"></div>
+
+        <div class="links" style="font-weight:bold; text-align:center">
+            <a class="btn btn-info" href="https://arxiv.org/abs/2512.01946v1" target="_blank">Paper</a>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-info" href="#" target="_blank">HuggingFace Data & Model (soon)</a>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-info" href="#" target="_blank">Code (soon)</a>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-info" href="#bib">BibTex</a>
+            &nbsp;&nbsp;&nbsp;
+        </div>
+
+        <hr>
+
+        <div class="row" id="abstract" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Abstract</h3>
+            <p style="text-align: justify;">
+                Robust robotic manipulation requires reliable failure detection and recovery. Although current Vision-Language Models (VLMs) show promise, their accuracy and generalization are limited by the scarcity of failure data. To address this data gap, we propose an automatic robot failure synthesis approach that procedurally perturbs successful trajectories to generate diverse planning and execution failures. This method produces not only binary classification labels but also fine-grained failure categories and step-by-step reasoning traces in both simulation and the real world.  With it, we construct three new failure detection benchmarks: RLBench-Fail, BridgeDataV2-Fail, and UR5-Fail, substantially expanding the diversity and scale of existing failure datasets. We then train Guardian, a VLM with multi-view images for detailed failure reasoning and detection. Guardian achieves state-of-the-art performance on both existing and newly introduced benchmarks. It also effectively improves task success rates when integrated into a state-of-the-art manipulation system in simulation and real robots, demonstrating the impact of our generated failure data.
+	        </p>
+        </div>
+
+        <hr>
+
+        <div class="row" id="introduction_video" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Introduction video</h3><br>
+            <center>
+            <video width="100%" controls>
+                <source src="resources/Guardian_Demo_RAL.mp4" type="video/mp4" allow="autoplay" />
+            </video>
+            </center>
+        </div>
+
+        <hr>
+
+        <div class="row" id="data" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Overview of Guardian's Data Generation Pipeline</h3><br>
+            <center>
+                <img src="resourcesata_Generation_Pipeline_Guardian_RAL.png" width="100%">
+            </center>
+            <br>
+            <p style="text-align: justify;">
+                <b>Failure Data Generation Pipeline.</b> We introduce a novel generation pipeline generating failure cases both online in simulation (RLBench), and offline on the real-world dataset (BridgeDataV2). For each positive example, given its correct plan and successful trajectory, we generate a corresponding incorrect plan and unsuccessful trajectory.
+            </p>
+            <br>
+            <center>
+                <img src="resourcesoT_Generation_Guardian_RAL.png" width="60%">
+            </center>
+            <br>
+            <p style="text-align: justify;">
+                <b>Chain-of-Thought (CoT) Generation.</b> We introduce an automatic method to generate step-by-step CoTs for training reasoning models. For each sample, we first collect the object category, spatial location, and robot state from the RLBench simulator or from ECoT annotations, together with the corresponding failure reason. We then prompt a large reasoning-capable VLM (InternVL3-38B) to generate step-by-step reasoning traces based on the initial text–image inputs and the aforementioned information. For planning samples, the model is instructed to sequentially verify each subtask and subsequently analyze the overall plan. For execution samples, the model is guided to describe the pre- and post-action images before assessing subtask completion. The reasoning trace contains 118 tokens on average.
+            </p>
+            <br>
+            <center>
+                <img src="resourcesr5_realrobot_setup.png" width="30%">
+            </center>
+            <br>
+            <p style="text-align: justify;">
+                <b>Real-Robot, Policy-Driven Data Collection.</b> We curate UR5-Fail, a real-robot dataset, collected using a UR5 arm with three cameras. We run the 3D-LOTUS++ policy on 34 tasks, recording initial and final multi-view images for each subtask. Subtasks are manually labeled as success or failure to obtain execution failure data. For planning failures, we annotate ground-truth plans and generate failures using the method above. Unlike RoboFail, which is single-view and relies solely on teleoperation, UR5-Fail is three-view and features autonomous policy rollouts yielding more realistic failures.
+            </p>
+            <br>
+        </div>
+
+        <hr>
+
+        <div class="row" id="method" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Method: The Guardian Model</h3><br>
+            <center>
+                <img src="resourcesodel_architecture.png" width="100%">
+            </center>
+            <br>
+            <p style="text-align: justify;">
+                <b>Model Architecture and Integration into a Robotic Manipulation Framework.</b> Left: Overview of the Guardian model architecture. Right: Integration of Guardian model into a robot manipulation pipeline for planning and execution verification.
+            </p>
+            <p><b>Architecture.</b> The Guardian model is built upon InternVL3-8B. Rather than concatenating multiple images into a single grid-based image as in AHA, Guardian processes each image independently through the visual encoder. This design preserves fine-grained spatial details within each image and allows the model to explicitly reason about spatial and temporal changes for more accurate failure detection. Furthermore, unlike SuccessVQA and AHA that output direct classifications, Guardian leverages an explicit reasoning trace before concluding success or failure.</p>
+            <p><b>Failure Detection and Recovery.</b> Guardian can be seamlessly plugged into existing robotic manipulation pipelines as a verification layer without requiring any architectural modification. Without loss of generality, consider a modular robotic manipulation framework. Guardian can be inserted at each planning and subtask execution step to detect potential failures. Upon detection, it can trigger replanning or re-execute the corresponding motion policy to facilitate recovery.</p>
+            <br>
+        </div>
+
+        <hr>
+
+        <div class="row" id="result_video_real" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Quantitative results on Robotic Manipulation Failure Detection Benchmarks</h3><br>
+            <center>
+                <img src="resourcesuantitative_results.svg" width="50%">
+            </center>
+        </div>
+
+        <hr>
+
+        <div class="row" id="result_sim" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Qualitative examples in simulation</h3><br>
+            <center>
+                <img src="resourceslbench_online_examples.png" width="100%">
+            </center>
+        </div>
+        <div class="row" id="result_real_world" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Qualitative examples in the real world</h3><br>
+            <center>
+                <img src="resourcesuardian_real_robot_example.png" width="70%">
+            </center>
+        </div>
+
+        <hr>
+
+	 <div class="row" id="bib" style="max-width:1000px; margin:0 auto; text-align:justify">
+	    <h3>BibTeX</h3>
+	       <pre><tt>@article{pacaud2025guardiandetectingroboticplanning,
+author       = {Paul Pacaud and Ricardo Garcia and Shizhe Chen and Cordelia Schmid},
+title        = {Guardian: Detecting Robotic Planning and Execution Errors with Vision-Language Models},
+booktitle    = {arXiv:2512.01946},
+year         = {2025},
+}</tt></pre>
+	</div> 
+
+        <div class="row" id="acknowledgements" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Acknowledgements</h3>
+            <p>
+	       This work was performed using HPC resources from GENCI-IDRIS (Grant 2025-AD011015795 and AD011015795R1). It was funded in part by the French government under management of Agence Nationale de la Recherche as part of the “France 2030" program, reference ANR-23-IACL-0008 (PR[AI]RIE-PSAI project), the ANR project VideoPredict ANR-21-FAI1-0002- 01. Cordelia Schmid would like to acknowledge the support by the Körber European Science Prize.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="row" id="copyright" style="max-width:1000px; margin:0 auto; text-align:justify">
+            <h3>Copyright</h3>
+            <p>
+                The documents contained in these directories are included by the contributing authors as a means to ensure timely dissemination of scholarly and technical work on a non-commercial basis. Copyright and all rights therein are maintained by the authors or by other copyright holders, notwithstanding that they have offered their works here electronically. It is understood that all persons copying this information will adhere to the terms and constraints invoked by each author's copyright.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="row" style="text-align: center;">
+            <div class="col-md-6">
+                <img src="resources/inria_logo.png" width="150">
+            </div>
+            <div class="col-md-6">
+                <img src="resources/ens_logo.png" width="150">
+            </div>
+        </div>
+
+        <br><br>
+   </body>
+</html>
